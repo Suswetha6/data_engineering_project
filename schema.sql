@@ -17,6 +17,7 @@ CREATE TABLE orders (
 
 CREATE TABLE product (
   product_id TEXT PRIMARY KEY,
+  product_name TEXT NOT NULL,
   product_category TEXT,
   product_sub_category TEXT,
   product_container TEXT,

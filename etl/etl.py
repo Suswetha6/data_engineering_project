@@ -6,7 +6,7 @@ from load import load_table
 from logger import setup_logger
 from dotenv import load_dotenv
 import os
-
+import pandas as pd
 load_dotenv()
 
 setup_logger()
@@ -42,6 +42,14 @@ valid_od = clean_nulls(valid_od)
 load_table(conn, "customer",
            ["customer_id", "customer_name", "customer_segment", "province", "region"],
            customers)
+
+orders["order_date"] = pd.to_datetime(
+    orders["order_date"], errors="coerce"
+).dt.date
+
+orders["ship_date"] = pd.to_datetime(
+    orders["ship_date"], errors="coerce"
+).dt.date
 
 load_table(
     conn,
